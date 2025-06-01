@@ -21,6 +21,9 @@ You can also call this from GitHub Actions (see .github/workflows/airbyte_setup.
 
 import os
 import sys
+# Ensure that the “scripts/” directory is on sys.path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sys
 import yaml
 import json
 from typing import Dict, List
