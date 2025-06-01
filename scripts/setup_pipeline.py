@@ -19,16 +19,19 @@ Usage (local or CI):
 You can also call this from GitHub Actions (see .github/workflows/airbyte_setup.yml).
 """
 
+
 import os
 import sys
+
 # Ensure that the “scripts/” directory is on sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import sys
+
 import yaml
 import json
 from typing import Dict, List
 
-from .airbyte_client import AirbyteClient, AirbyteAPIError
+# Import airbyte_client.py from the same directory
+from airbyte_client import AirbyteClient, AirbyteAPIError
 
 
 def load_and_render_yaml(path: str) -> Dict:
