@@ -28,7 +28,7 @@ import yaml
 import json
 from typing import Dict, List
 
-from scripts.airbyte_client import AirbyteClient, AirbyteAPIError
+from .airbyte_client import AirbyteClient, AirbyteAPIError
 
 
 def load_and_render_yaml(path: str) -> Dict:
