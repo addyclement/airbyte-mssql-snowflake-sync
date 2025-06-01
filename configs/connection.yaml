@@ -1,0 +1,13 @@
+name: MSSQL_CDC_to_Snowflake_BronzeClone
+namespaceFormat: ${SOURCE_NAMESPACE}
+schedule:
+  units: 5
+  timeUnit: minutes
+tables:
+  - Customers
+  - Loan
+  - LoanInstallment
+  - LoanHistory
+syncMode: incremental
+destinationSyncMode: append_dedup
+autoPropagateSchema: true

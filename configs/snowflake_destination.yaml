@@ -1,0 +1,10 @@
+name: BRONZE_LoanDataServicesClone_Snowflake
+definitionId: 424892c4-daac-4491-b35d-c6688ba547ba
+connectionConfiguration:
+  host: ${SNOWFLAKE_ACCOUNT}.snowflakecomputing.com
+  username: ${SNOWFLAKE_USERNAME}
+  password: ${SNOWFLAKE_PASSWORD}
+  role: ${SNOWFLAKE_ROLE}
+  warehouse: ${SNOWFLAKE_WAREHOUSE}
+  database: BRONZE
+  schema: LoanDataServicesClone

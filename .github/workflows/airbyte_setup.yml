@@ -1,0 +1,45 @@
+name: "🛠️ Airbyte Cloud: Configure CDC-only MSSQL → Snowflake (Python OOP)"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  configure_pipeline:
+    name: "Configure Airbyte CDC Pipeline"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "Set up Python 3.9"
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Export all required environment variables from GitHub Secrets
+      - name: "Export environment variables"
+        run: |
+          echo "AIRBYTE_API_TOKEN=${{ secrets.AIRBYTE_API_TOKEN }}" >> $GITHUB_ENV
+          echo "AIRBYTE_WORKSPACE_ID=${{ secrets.AIRBYTE_WORKSPACE_ID }}" >> $GITHUB_ENV
+
+          echo "SQLSERVER_HOST=${{ secrets.SQLSERVER_HOST }}" >> $GITHUB_ENV
+          echo "SQLSERVER_PORT=${{ secrets.SQLSERVER_PORT }}" >> $GITHUB_ENV
+          echo "SQLSERVER_USERNAME=${{ secrets.SQLSERVER_USERNAME }}" >> $GITHUB_ENV
+          echo "SQLSERVER_PASSWORD=${{ secrets.SQLSERVER_PASSWORD }}" >> $GITHUB_ENV
+
+          echo "SNOWFLAKE_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}" >> $GITHUB_ENV
+          echo "SNOWFLAKE_USERNAME=${{ secrets.SNOWFLAKE_USERNAME }}" >> $GITHUB_ENV
+          echo "SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}" >> $GITHUB_ENV
+          echo "SNOWFLAKE_ROLE=${{ secrets.SNOWFLAKE_ROLE }}" >> $GITHUB_ENV
+          echo "SNOWFLAKE_WAREHOUSE=${{ secrets.SNOWFLAKE_WAREHOUSE }}" >> $GITHUB_ENV
+        shell: bash
+
+      - name: "Run setup_pipeline.py"
+        run: |
+          python scripts/setup_pipeline.py
